@@ -7,6 +7,11 @@ on:
       - main
       - 'feature/**'
 
+env:
+    MONGO URI: 'mongodb+srv://supercluster.d83jj-mongodb.net/superData'
+    MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
+    MONGO_PASSWORD: ${{ secrets.MONGO PASSWORD }}
+
 jobs:
   unit-testing:
     name: Unit Testing
@@ -14,7 +19,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        
+
       - name: Setup NodeJS Version - 18
         uses: actions/setup-node@v3
         with:
