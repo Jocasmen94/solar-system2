@@ -11,8 +11,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/')));
 app.use(cors());
 
-// Conectar a MongoDB solo si no estamos en modo de prueba
-if (process.env.NODE_ENV !== 'test') {
+// Conectar a MongoDB solo si no estamos en modo de prueba o NODE_ENV no está definido
+if (process.env.NODE_ENV && process.env.NODE_ENV !== 'test') {
     mongoose.connect(process.env.MONGO_URI, {
         user: process.env.MONGO_USERNAME,
         pass: process.env.MONGO_PASSWORD,
@@ -26,12 +26,12 @@ if (process.env.NODE_ENV !== 'test') {
         }
     });
 } else {
-    console.log('Skipping MongoDB connection in test mode');
+    console.log('Skipping MongoDB connection in test mode or undefined NODE_ENV');
 }
 
 // Definir esquema y modelo de MongoDB (solo para modo no-test)
 let planetModel;
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV && process.env.NODE_ENV !== 'test') {
     var Schema = mongoose.Schema;
     var dataSchema = new Schema({
         name: String,

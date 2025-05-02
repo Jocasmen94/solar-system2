@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
-    "test": "mocha app-test.js --timeout 10000 --reporter mocha-junit-reporter --exit",
+    "test": "NODE_ENV=test mocha app-test.js --timeout 10000 --reporter mocha-junit-reporter --exit",
     "coverage": "nyc --reporter cobertura --reporter lcov --reporter text --reporter json-summary  mocha app-test.js --timeout 10000  --exit"
   },
   "nyc": {
@@ -18,6 +18,7 @@
     "express": "^4.18.2",
     "mocha-junit-reporter": "^2.2.1",
     "mongoose": "5.13.20",
+    "nodemon": "^3.0.1",
     "nyc": "^15.1.0"
   },
   "devDependencies": {

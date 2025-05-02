@@ -1,17 +1,15 @@
-let mongoose = require("mongoose");
-let server = require("./app");
-let chai = require("chai");
-let chaiHttp = require("chai-http");
-let sinon = require("sinon");
+// Mock Mongoose antes de importar app.js para evitar conexiones reales
+const sinon = require('sinon');
+const mongoose = require("mongoose");
+sinon.stub(mongoose, 'connect').resolves(); // Mock aplicado antes de cargar app.js
+
+const server = require("./app");
+const chai = require("chai");
+const chaiHttp = require("chai-http");
 
 // Assertion 
 chai.should();
 chai.use(chaiHttp); 
-
-// Mock Mongoose para evitar conexiones reales a MongoDB
-before(() => {
-    sinon.stub(mongoose, 'connect').resolves();
-});
 
 after(() => {
     sinon.restore();
